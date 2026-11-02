@@ -52,6 +52,11 @@ function createWindow(): void {
     },
   })
   win.once('ready-to-show', () => win?.show())
+  // Never stay invisible: if the renderer is slow to load (e.g. the dev server's first
+  // dependency scan), show the window anyway after a few seconds.
+  setTimeout(() => {
+    if (win && !win.isVisible()) win.show()
+  }, 4000)
   // Open external links in the browser, never inside the app.
   win.webContents.setWindowOpenHandler(({ url }) => {
     void shell.openExternal(url)

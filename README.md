@@ -21,7 +21,8 @@ the 4GLTrace/4GLMessages parser and the raw log viewer.
 cd protrace-analyzer
 npm install          # scripts are skipped via .npmrc (no Visual Studio needed)
 npm run setup        # downloads the Electron binary (~120 MB), first time only
-npm run dev          # starts the app with hot reload
+npm start            # builds and runs the app (what run-protrace.bat uses)
+npm run dev          # development mode with hot reload
 ```
 
 Other scripts:

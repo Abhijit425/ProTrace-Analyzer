@@ -87,8 +87,9 @@ if not exist "node_modules\electron\dist\electron.exe" (
 
 rem ---- 4. Start the app ------------------------------------------
 echo.
-echo Starting ProTrace Analyzer... ^(close this window to stop the app^)
-call npm run dev
+echo Building and starting ProTrace Analyzer... ^(close this window to stop the app^)
+echo ^(Developers: use "npm run dev" for hot reload.^)
+call npm start
 if errorlevel 1 (
   echo.
   echo The app stopped with an error. Copy the text above and send it to Claude.
