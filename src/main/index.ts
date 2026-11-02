@@ -2,7 +2,7 @@
  * Electron main process: window, session database, IPC handlers.
  */
 import { app, BrowserWindow, dialog, ipcMain, shell } from 'electron'
-import { mkdirSync, rmSync } from 'node:fs'
+import { mkdirSync, readdirSync, rmSync } from 'node:fs'
 import { join } from 'node:path'
 import { IPC } from '@shared/ipc'
 import type { ViewFilter } from '@shared/types'
@@ -19,12 +19,23 @@ let ingest: IngestManager
 let recent: RecentList
 let dbPath: string
 
-/** Each launch (and "New analysis") starts from an empty session database. */
+/**
+ * Each launch (and "New analysis") starts from an empty session database.
+ * Every session gets its own file, so a locked file (e.g. another copy of the app,
+ * or antivirus scanning it) can never stop the app from starting. Old session
+ * files are removed on a best-effort basis.
+ */
 function openSession(): void {
   const dir = join(app.getPath('userData'), 'session')
   mkdirSync(dir, { recursive: true })
-  dbPath = join(dir, 'current.sqlite')
-  for (const suffix of ['', '-wal', '-shm']) rmSync(dbPath + suffix, { force: true })
+  for (const f of readdirSync(dir)) {
+    try {
+      rmSync(join(dir, f), { force: true })
+    } catch {
+      /* still in use - ignore, it will be cleaned up next time */
+    }
+  }
+  dbPath = join(dir, `session-${Date.now()}.sqlite`)
   db = openDb(dbPath)
   store = new SessionStore(db)
   ingest = new IngestManager(store, dbPath, createParseWorker, {
@@ -112,6 +123,18 @@ function registerIpc(): void {
   ipcMain.handle(IPC.getFacets, () => store.getFacets())
   ipcMain.handle(IPC.getRecent, () => recent.get())
   ipcMain.handle(IPC.clearRecent, () => recent.clear())
+}
+
+// Only one copy of the app at a time; a second launch focuses the existing window.
+if (!app.requestSingleInstanceLock()) {
+  app.quit()
+} else {
+  app.on('second-instance', () => {
+    if (!win) return
+    if (win.isMinimized()) win.restore()
+    win.show()
+    win.focus()
+  })
 }
 
 app.whenReady().then(() => {

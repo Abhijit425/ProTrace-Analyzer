@@ -82,7 +82,7 @@ renderer (React)  ──IPC──►  main process  ──spawn──►  worker
 - **Viewer paging:** when the filter changes, the matching ids are copied into a TEMP table with a dense sequence
   number. Any scroll position is then a primary-key lookup (about 1 ms at row 2.8 million). Above roughly 360k rows the
   scrollbar is scaled to stay within the browser's height limit, and the wheel and keyboard move by rows.
-- **Session data** is kept in `%APPDATA%\protrace-analyzer\session\current.sqlite` and recreated on each launch.
+- **Session data** is kept in `%APPDATA%\protrace-analyzer\session\` (a fresh file per launch; old ones are cleaned up).
   Saving and reopening `.ptx` sessions arrives in M7.
 
 ## Tests
