@@ -1,0 +1,24 @@
+[26/10/12@10:15:20.001+0530] P-012345 T-000001 1 4GL -- Logging level set to = 4
+[26/10/12@10:15:20.002+0530] P-012345 T-000001 1 4GL -- Log entry types activated: 4GLTrace,4GLMessages,DB.Connects,FileID,QryInfo
+[26/10/12@10:15:20.100+0530] P-012345 T-000001 2 4GL DB.Connects    Connected to database qaddb, single user = no (15321)
+[26/10/12@10:15:21.500+0530] P-012345 T-000001 4 4GL 4GLTRACE       Run xxmain.p [Main Block - mfmenu.p @ 812]
+[26/10/12@10:15:21.510+0530] P-012345 T-000001 4 4GL FILEID         Open D:\qad\src\xxmain.r ID=12
+[26/10/12@10:15:22.050+0530] P-012345 T-000001 4 4GL 4GLTRACE       Run xxpo.p "1001" [Main Block - xxmain.p @ 245]
+[26/10/12@10:15:22.060+0530] P-012345 T-000001 4 4GL 4GLTRACE       Run validate-part [Main Block - xxpo.p @ 88]
+[26/10/12@10:15:22.070+0530] P-012345 T-000001 4 4GL 4GLTRACE       Func getPartDesc "10-1000" [validate-part - xxpo.p @ 131]
+[26/10/12@10:15:22.075+0530] P-012345 T-000001 4 4GL 4GLTRACE       Return from getPartDesc [xxpo.p]
+[26/10/12@10:15:22.080+0530] P-012345 T-000001 4 4GL QRYINFO        Query Plan: xxpo.p line 140 FOR EACH pt_mstr WHERE pt_part = ...
+[26/10/12@10:15:22.123+0530] P-012345 T-000001 1 4GL 4GLMESSAGE     (Procedure: 'validate-part xxpo.p' Line:142) ** No pt_mstr record is available. (91)
+[26/10/12@10:15:22.130+0530] P-012345 T-000001 4 4GL 4GLTRACE       Return from validate-part [xxpo.p]
+[26/10/12@10:15:22.140+0530] P-012345 T-000001 4 4GL 4GLTRACE       Publish "PoUpdated" [Main Block - xxpo.p @ 95]
+[26/10/12@10:15:22.141+0530] P-012345 T-000001 4 4GL 4GLTRACE       Subscribe PoUpdated [Main Block - xxlisten.p @ 12]
+[26/10/12@10:15:22.150+0530] P-012345 T-000001 4 4GL 4GLTRACE       Invoke Qad.Po.Service:Save [Main Block - xxpo.p @ 101]
+[26/10/12@10:15:22.200+0530] P-012345 T-000001 4 4GL 4GLTRACE       Return from Main Block [xxpo.p]
+[26/10/12@10:15:23.000+0530] P-012345 T-000001 2 4GL --             WARNING: -s stack size is close to its limit.
+[26/10/12@10:15:23.500+0530] P-012345 T-000001 1 4GL --             ** Lock table overflow, increase -L on server (915)
+[26/10/12@10:15:23.501+0530] P-012345 T-000001 1 4GL --             SYSTEM ERROR: Memory violation. (49)
+Stack trace of the failing call follows:
+    xxpo.p line 245
+    mfmenu.p line 812
+
+[26/10/12@10:15:24.000+0530] P-012345 T-000001 4 4GL 4GLTRACE       Return from Main Block [xxmain.p]

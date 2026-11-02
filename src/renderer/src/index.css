@@ -1,0 +1,41 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:where(.dark, .dark *));
+
+@theme {
+  --font-sans: 'Segoe UI Variable', 'Segoe UI', system-ui, sans-serif;
+  --font-mono: 'Cascadia Mono', 'Cascadia Code', Consolas, 'Courier New', monospace;
+  --color-accent-400: #5eb3ff;
+  --color-accent-500: #2f95f5;
+  --color-accent-600: #1c78d6;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  @apply bg-slate-50 text-slate-800 antialiased dark:bg-[#0b0f17] dark:text-slate-200;
+  font-family: var(--font-sans);
+  overflow: hidden;
+}
+
+/* Slim scrollbars that fit both themes */
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+}
+::-webkit-scrollbar-thumb {
+  @apply rounded-full bg-slate-300 dark:bg-slate-700;
+  border: 2px solid transparent;
+  background-clip: content-box;
+}
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+
+mark.hit {
+  @apply rounded-sm bg-amber-300/80 px-px text-slate-900 dark:bg-amber-400/80;
+}

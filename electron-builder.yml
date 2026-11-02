@@ -1,0 +1,20 @@
+appId: com.abhijit.protrace-analyzer
+productName: ProTrace Analyzer
+directories:
+  buildResources: build
+  output: dist
+files:
+  - out/**
+  - package.json
+asarUnpack:
+  - node_modules/better-sqlite3/**
+npmRebuild: false          # better-sqlite3 ships N-API prebuilds; no native rebuild needed
+win:
+  target:
+    - target: nsis
+      arch: [x64]
+  artifactName: ${productName}-Setup-${version}.${ext}
+nsis:
+  oneClick: false
+  allowToChangeInstallationDirectory: true
+  createDesktopShortcut: true

@@ -1,0 +1,11 @@
+2026-10-12 10:15:21,900 INFO  [main] com.qad.qxtend.Server - QXtend inbound started
+2026-10-12 10:15:22,124 ERROR [http-nio-8080-exec-3] com.qad.qxtend.Dispatcher - Request failed for PurchaseOrder 1001
+java.lang.IllegalStateException: AppServer returned error
+	at com.qad.qxtend.Dispatcher.call(Dispatcher.java:211)
+	at com.qad.qxtend.Server.handle(Server.java:88)
+Caused by: com.progress.open4gl.Open4GLException: ** No pt_mstr record is available. (91)
+	... 12 more
+2026-10-12 10:15:23,000 WARN  [main] com.qad.qxtend.Pool - Pool 80% used
+02-Nov-2026 10:15:24.500 SEVERE [main] org.apache.catalina.core.StandardContext.startInternal One or more listeners failed to start.
+
+plain line with no timestamp

@@ -1,0 +1,6 @@
+[2026/10/12@09:00:01.000+0000] P-000777 T-000002 1 4GL -- ** pt_mstr already exists with Item Number "10-1000". (132)
+[2026/10/12@09:00:02.000+0000] P-000777 T-000002 1 4GL -- ** pt_mstr record not on file. (138)
+[2026/10/12@09:00:03.000+0000] P-000777 T-000002 1 4GL -- ** Unable to update pt_mstr Field. (142)
+[2026/10/12@09:00:04.000+0000] P-000777 T-000002 1 4GL -- ** ** Array subscript 0 is out of range. (26)
+[2026/10/12@09:00:05.000+0000] P-000777 T-000002 2 4GL -- Procedure complete.
+[2026/10/12@09:00:06.000+0000] P-000777 T-000002 1 4GL -- ** pt_mstr is in use by qadadm on batch. Wait or choose CANCEL to stop. (2624)
