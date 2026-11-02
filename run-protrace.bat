@@ -62,13 +62,24 @@ if not exist "%APPDIR%\package.json" (
 cd /d "%APPDIR%"
 
 rem ---- 3. Install dependencies (first run only) -------------------
-if not exist "node_modules\electron\dist\electron.exe" (
+if not exist "node_modules\electron\package.json" (
   echo.
-  echo Installing dependencies - first run downloads Electron ^(~120 MB^), please wait...
-  call npm install
+  echo Installing dependencies, please wait...
+  call npm install --ignore-scripts
   if errorlevel 1 (
     echo.
     echo npm install failed. Copy the red error text above and send it to Claude.
+    pause
+    exit /b 1
+  )
+)
+if not exist "node_modules\electron\dist\electron.exe" (
+  echo.
+  echo Downloading Electron ^(~120 MB, first run only^)...
+  call node node_modules\electron\install.js
+  if errorlevel 1 (
+    echo.
+    echo Electron download failed. Copy the text above and send it to Claude.
     pause
     exit /b 1
   )

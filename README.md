@@ -12,12 +12,15 @@ the 4GLTrace/4GLMessages parser and the raw log viewer.
 - Windows 10/11 x64
 - **Node.js 22 LTS or newer** (`node -v`)
 - No Visual Studio Build Tools needed: better-sqlite3 ships a prebuilt N-API binary that Electron loads as-is.
+  `.npmrc` sets `ignore-scripts=true` because some npm versions try to compile it anyway.
+- Easiest: double-click `run-protrace.bat`, which does all of this for you.
 
 ## Run it
 
 ```powershell
 cd protrace-analyzer
-npm install          # downloads Electron (~120 MB) the first time
+npm install          # scripts are skipped via .npmrc (no Visual Studio needed)
+npm run setup        # downloads the Electron binary (~120 MB), first time only
 npm run dev          # starts the app with hot reload
 ```
 
